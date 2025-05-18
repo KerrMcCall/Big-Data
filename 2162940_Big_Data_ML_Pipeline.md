@@ -149,15 +149,74 @@ The accuracy of this model further imoroved up to 99.2% and there was a minimal 
 The downsides are that it took longer to train and had a higher memory usage.
 
 ### 4. Prediction
+Once the thrid model was trained and validated, it was used to mkae predictions on useen data. This was carried out to test the model's ability to generalise beyond the training and validation subsets.
+
+The following code was used:
+```python
+# Generate predictions for the test set
+y_pred = model_3.predict(X_test)
+y_pred_classes = np.argmax(y_pred, axis=1)
+```
+This model outputted a ten class probability vector for each test image and predicted the class with the highest probability. The final precition was compared against the true label to evaluate its performance.
+
+To visualise these predictions, random sampples from the test set were selected and annotated with the predicted and actual digit values:
+```python
+# Visualise a few predictions
+plt.figure(figsize=(12, 4))
+for i in range(10):
+    idx = np.random.randint(0, X_test.shape[0])
+    plt.subplot(2, 5, i + 1)
+    plt.imshow(X_test[idx].reshape(28, 28), cmap='gray')
+    plt.title(f"Pred: {y_pred_classes[idx]} | True: {y_test[idx]}")
+    plt.axis('off')
+plt.suptitle("Sample Predictions from Test Set")
+plt.show()
+```
+The overall performance of this model was then evaluated using classification metrics:
+```python
+from sklearn.metrics import classification_report, confusion_matrix
+
+print("Classification Report:\n")
+print(classification_report(y_test, y_pred_classes))
+
+print("Confusion Matrix:\n")
+plt.figure(figsize=(10, 8))
+sns.heatmap(confusion_matrix(y_test, y_pred_classes), annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix on Test Set')
+plt.show()
+```
+
 
 ## Jupyter Notebook Structure
+The Jupyter Notebook was arranged into logical sections as follows:
+
+### 1. Library Imports
+### 2. Data Loading and Preprocessing
+### 3. EDA
+### 4. First Model
+### 5. Second Model
+### 6. Third Model
+### 7. Predictions
 
 ## Future Work
 
+
 ## Libraries and Modules
+The following libraries were used in the Jupyter Notebook:
+
+NumPy – Efficient numerical operations and array manipulations;
+Matplotlib/Seaborn – Data visualization: plotting digit samples, confusion matrices, and training curves;
+TensorFlow/Keras – High-level neural network API used for building and training CNNs;
+sklearn – Splitting datasets, confusion matrix, classification metrics;
+Pandas – (Minimal use, for dataframe-like manipulations if needed).
 
 ## Unfixed bugs
+Occasionally, the val_accuracy slightly fluctuated due randomness in data split or training.
 
 ## Acknowledgements and References
+Code snippets adapted with assistance from OpenAi ChatGPT
+Dataset provided by TensorFlow Datasets - MNIST
 
 ## Conclusions
