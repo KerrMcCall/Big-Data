@@ -34,15 +34,20 @@ An EDA was conducted in order to better understand the structure and content of 
 In order to verify that the images are loaded correctly, some random images can be plotted:
 
 ```python
-# Plot 10 random images from the training dataset
-plt.figure(figsize=(10,2))
-for i in range(1, 10):
-  idx = np.random.randint(0, X_train.shape[0])
-  plt.subplot(1, 10, i + 1)
-  plt.imshow(X_train[idx[.reshape(28, 28), cmap ='gray'
-  plt.title(np.argmax(y_train_cat[idx]))
-  plt.axis('off')
-plt.suptitle("Random Sample Images fromm Training Subset")
+plt.figure(figsize=(10,5))
+for i in range(10):
+    plt.subplot(2, 5, i+1)
+    plt.imshow(X_train[i].reshape(28, 28), cmap='gray')
+    plt.title(f"Label: {np.argmax(y_train_cat[i])}")
+    plt.axis('off')
+plt.suptitle("Sample MNIST Digits")
+plt.show()
+
+unique, counts = np.unique(y_train, return_counts=True)
+plt.bar(unique, counts)
+plt.title("Distribution of Digits in Training Set")
+plt.xlabel("Digit")
+plt.ylabel("Count")
 plt.show()
 ```
 
