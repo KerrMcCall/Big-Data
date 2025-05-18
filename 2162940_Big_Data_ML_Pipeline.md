@@ -34,36 +34,30 @@ An EDA was conducted in order to better understand the structure and content of 
 In order to verify that the images are loaded correctly, some random images can be plotted:
 
 ```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-# Plot 10 random images from the training dataset
-plt.figure(figsize=(10,2))
-for i in range(1, 10):
-  idx = np.random.randint(0, X_train.shape[0])
-  plt.subplot(1, 10, i + 1)
-  plt.imshow(X_train[idx[.reshape(28, 28), cmap ='gray'
-  plt.title(np.argmax(y_train_cat[idx]))
-  plt.axis('off')
-plt.suptitle("Random Sample Images fromm Training Subset")
+plt.figure(figsize=(10,5))
+for i in range(10):
+    plt.subplot(2, 5, i+1)
+    plt.imshow(X_train[i].reshape(28, 28), cmap='gray')
+    plt.title(f"Label: {np.argmax(y_train_cat[i])}")
+    plt.axis('off')
+plt.suptitle("Sample MNIST Digits")
 plt.show()
 ```
 
-The above code generates 10 random integers and then plots the corresponding images in the training subset from the MNIST dataset.
+The above code generates 10 random integers and then plots the corresponding images in the training subset from the MNIST dataset. They are displayed in a greyscale 28x28 pixel format.
 
 In order to check for imbalances, the distribution of digit labels is plotted:
 
 ```python
-import seaborn as sns
-# Count the occurences of each digit in the original training labels
-sns.countplot(x=y_train)
-plt.title("Distribution of Digit Lables in Training Subset")
+unique, counts = np.unique(y_train, return_counts=True)
+plt.bar(unique, counts)
+plt.title("Distribution of Digits in Training Set")
 plt.xlabel("Digit")
-plt.ylabel("Frequency")
+plt.ylabel("Count")
 plt.show()
 ```
 
-This code plots the frequency of each digit in order to verify no imbalances in the dataset.
+This code plots a bar chart showing the frequency of each digit in order to verify no imbalances in the dataset.
 
 ### 3. Model Development
 The following section details the iterative process of building the CNN model, showing where the improvements were made along the way.
@@ -87,11 +81,21 @@ The selected epoch number for this model was 5 in order to give a quick feedback
 
 ```python
 model_1.compile(optimizer='adam', loss='categorical_crossentropy', metrics='accuracy'])
-history_1 = model_1.fit(X_train, y_train_cat, epochs=5, validation_data=(X_val, y_val_cat))
+history_1 = model_1.fit(X_train, y_train_cat, epochs=5, batch_size=128, validation_data=(X_val, y_val_cat))
 ```
 
 ##### Model Evaluation
-The model had a validation accuracy of approximately 97.5%, which is viable based on the previously stated objectives. It was fast to train and simple to understand. It is likely that after the first 5 epochs, the validation loss would plateau or possibly diverge in such a simple model.
+The model had a validation accuracy of approximately 98.6%, which is viable based on the previously stated objectives. It was fast to train and simple to understand. It is likely that after the first 5 epochs, the validation loss would plateau or possibly diverge in such a simple model.
+
+The following code was used to provide a visual representation of the accuracy of each model:
+
+```python
+plt.plot(history_1.history['accuracy'], label='Train Accuracy')
+plt.plot(history_1.history['val_accuracy'], label='Validation Accuracy')
+plt.title("Accuracy over Epochs")
+plt.legend()
+plt.show()
+```
 
 #### Second Model
 The second iteration was a deeper CNN with Dropout which made improvements based on the first model's limitations.
@@ -115,7 +119,7 @@ model_2 = Sequential([
 The chosen epoch number for this model was 10.
 
 ##### Model Evaluation
-The second CNN had an increased validation accuracy of roughly 98.5% and it handled the variation better. There was also less issues in regard to overfitting however the training time was slightly longer.
+The second CNN had an increased validation accuracy of roughly 99.1% and it handled the variation better. There was also less issues in regard to overfitting however the training time was slightly longer.
 
 There is still room for improvement in the area of accuracy and generalisation.
 
@@ -149,7 +153,7 @@ The accuracy of this model further imoroved up to 99.2% and there was a minimal 
 The downsides are that it took longer to train and had a higher memory usage.
 
 ### 4. Prediction
-Once the thrid model was trained and validated, it was used to mkae predictions on useen data. This was carried out to test the model's ability to generalise beyond the training and validation subsets.
+Once the third model was trained and validated, it was used to mkae predictions on unseen data. This was carried out to test the model's ability to generalise beyond the training and validation subsets.
 
 The following code was used:
 ```python
@@ -157,9 +161,9 @@ The following code was used:
 y_pred = model_3.predict(X_test)
 y_pred_classes = np.argmax(y_pred, axis=1)
 ```
-This model outputted a ten class probability vector for each test image and predicted the class with the highest probability. The final precition was compared against the true label to evaluate its performance.
+This model outputted a ten class probability vector for each test image and predicted the class with the highest probability. The final preciction was compared against the true label to evaluate its performance.
 
-To visualise these predictions, random sampples from the test set were selected and annotated with the predicted and actual digit values:
+To visualise these predictions, random samples from the test set were selected and annotated with the predicted and actual digit values:
 ```python
 # Visualise a few predictions
 plt.figure(figsize=(12, 4))
@@ -174,8 +178,6 @@ plt.show()
 ```
 The overall performance of this model was then evaluated using classification metrics:
 ```python
-from sklearn.metrics import classification_report, confusion_matrix
-
 print("Classification Report:\n")
 print(classification_report(y_test, y_pred_classes))
 
