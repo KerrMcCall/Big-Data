@@ -42,7 +42,13 @@ for i in range(10):
     plt.axis('off')
 plt.suptitle("Sample MNIST Digits")
 plt.show()
+```
 
+The above code generates 10 random integers and then plots the corresponding images in the training subset from the MNIST dataset. They are displayed in a greyscale 28x28 pixel format.
+
+In order to check for imbalances, the distribution of digit labels is plotted:
+
+```python
 unique, counts = np.unique(y_train, return_counts=True)
 plt.bar(unique, counts)
 plt.title("Distribution of Digits in Training Set")
@@ -51,20 +57,7 @@ plt.ylabel("Count")
 plt.show()
 ```
 
-The above code generates 10 random integers and then plots the corresponding images in the training subset from the MNIST dataset.
-
-In order to check for imbalances, the distribution of digit labels is plotted:
-
-```python
-# Count the occurences of each digit in the original training labels
-sns.countplot(x=y_train)
-plt.title("Distribution of Digit Lables in Training Subset")
-plt.xlabel("Digit")
-plt.ylabel("Frequency")
-plt.show()
-```
-
-This code plots the frequency of each digit in order to verify no imbalances in the dataset.
+This code plots a bar chart showing the frequency of each digit in order to verify no imbalances in the dataset.
 
 ### 3. Model Development
 The following section details the iterative process of building the CNN model, showing where the improvements were made along the way.
