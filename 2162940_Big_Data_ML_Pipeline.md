@@ -34,9 +34,6 @@ An EDA was conducted in order to better understand the structure and content of 
 In order to verify that the images are loaded correctly, some random images can be plotted:
 
 ```python
-import matplotlib.pyplot as plt
-import numpy as np
-
 # Plot 10 random images from the training dataset
 plt.figure(figsize=(10,2))
 for i in range(1, 10):
@@ -54,7 +51,6 @@ The above code generates 10 random integers and then plots the corresponding ima
 In order to check for imbalances, the distribution of digit labels is plotted:
 
 ```python
-import seaborn as sns
 # Count the occurences of each digit in the original training labels
 sns.countplot(x=y_train)
 plt.title("Distribution of Digit Lables in Training Subset")
@@ -174,8 +170,6 @@ plt.show()
 ```
 The overall performance of this model was then evaluated using classification metrics:
 ```python
-from sklearn.metrics import classification_report, confusion_matrix
-
 print("Classification Report:\n")
 print(classification_report(y_test, y_pred_classes))
 
