@@ -85,7 +85,7 @@ history_1 = model_1.fit(X_train, y_train_cat, epochs=5, batch_size=128, validati
 ```
 
 ##### Model Evaluation
-The model had a validation accuracy of approximately 98.6%, which is viable based on the previously stated objectives. It was fast to train and simple to understand. It is likely that after the first 5 epochs, the validation loss would plateau or possibly diverge in such a simple model.
+The model had a validation accuracy of approximately 98.3%, which is viable based on the previously stated objectives. It was fast to train and simple to understand. It is likely that after the first 5 epochs, the validation loss would plateau or possibly diverge in such a simple model.
 
 The following code was used to provide a visual representation of the accuracy of each model:
 
@@ -119,7 +119,7 @@ model_2 = Sequential([
 The chosen epoch number for this model was 10.
 
 ##### Model Evaluation
-The second CNN had an increased validation accuracy of roughly 99.1% and it handled the variation better. There was also less issues in regard to overfitting however the training time was slightly longer.
+The second CNN had an increased validation accuracy of roughly 99.2% and it handled the variation better. There was also less issues in regard to overfitting however the training time was slightly longer.
 
 There is still room for improvement in the area of accuracy and generalisation.
 
@@ -148,7 +148,7 @@ model_3 = Sequential([
 This model had an epoch number of 12.
 
 ##### Model Evaluation
-The accuracy of this model further imoroved up to 99.2% and there was a minimal gap between the training and validation accuracy. This demonstrates a great level of generalisation and no major overfitting was observed.
+The accuracy of this model further imoroved up to 99.3% and there was a minimal gap between the training and validation accuracy. This demonstrates a great level of generalisation and no major overfitting was observed.
 
 The downsides are that it took longer to train and had a higher memory usage.
 
@@ -201,9 +201,16 @@ The Jupyter Notebook was arranged into logical sections as follows:
 ### 5. Second Model
 ### 6. Third Model
 ### 7. Predictions
+### 8. Performance Evaluation
 
 ## Future Work
+While the final model performed well, there are areas which could be further developed in the future. The implementation of early stopping and learning rate schedulers could further improve on the overfitting issue and allow the model to generalise better to unseen dataa.
 
+There is also room for further development of the model into a real-world environment, such as a mobile app or a web interface, which would allow users to classify digits in real-time.
+
+A more advanced neural network architecture, such as ResNet or MobileNet, could lead to further improvements in accuracy and training efficiency.
+
+These developments would simultaneously improve the technical performance of the system and expand its utilisation in practical settings.
 
 ## Libraries and Modules
 The following libraries were used in the Jupyter Notebook:
@@ -212,13 +219,20 @@ NumPy – Efficient numerical operations and array manipulations;
 Matplotlib/Seaborn – Data visualization: plotting digit samples, confusion matrices, and training curves;
 TensorFlow/Keras – High-level neural network API used for building and training CNNs;
 sklearn – Splitting datasets, confusion matrix, classification metrics;
-Pandas – (Minimal use, for dataframe-like manipulations if needed).
+Pandas – (Minimal use, for dataframe-like manipulations if needed);
+Plotly.express - For figure generation.
 
 ## Unfixed bugs
 Occasionally, the val_accuracy slightly fluctuated due randomness in data split or training.
 
 ## Acknowledgements and References
 Code snippets adapted with assistance from OpenAi ChatGPT
+
 Dataset provided by TensorFlow Datasets - MNIST
 
 ## Conclusions
+This project has demonstarted how to build a Machine Learning pipeline using a Convolutional Neural Network for handwritten digit classification on the MNIST dataset. Using an iterative process, three models were constructed, with each improving on the last in terms of accuracy and generalisation. The final model had an accuracy of 99.3%, surpassing the stated goal of >90% in the business objectives.
+
+The models were trained using standard preprocessing steps and the pipeline includes data normalisation, one-hot encoding of labels, validation splitting and multiple performance evaluations, which have also been visually represented.
+
+Overall, this pipeline demonstrates the effectiveness of CNNs in image classification and provides a sound foundation for future developments on these models or in the wider field.
