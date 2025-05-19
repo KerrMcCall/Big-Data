@@ -1,7 +1,7 @@
 # Big Data ML Pipeline 2162940
 
 ## Introduction
-This project will provide a comprehensive report overviewing the steps required to deploy a Machine Learning Pipeline for Image Classification, employing Convolutional Neural Network (CNN). The entire process will be documented, from the data collection stage, through to the building of the model, evaluating its performance and using this to predict future performances. This will be repeated for three differnet models, which continue to improve upon the last in an iterative process. The structure of the code, written in a separate Jupyter Notebook, will be covered before potential future improvements will be considered - these will be influenced by the unfixed bugs that are present in the model.
+This project will provide a comprehensive report overviewing the steps required to deploy a Machine Learning Pipeline for Image Classification, employing Convolutional Neural Network (CNN). The entire process will be documented, from the data collection stage, through to the building of the model, evaluating its performance and using this to predict future performances. This will be repeated for three different models, which continue to improve upon the last in an iterative process. The structure of the code, written in a separate Jupyter Notebook, will be covered before potential future improvements will be considered - these will be influenced by the unfixed bugs that are present in the model.
 
 The data set used in this model is the Modified National Institute of Standards and Technology, abbreviated to MNIST, which is a classic dataset used for handwritten digit classification. It contains greyscale images of digits 0-9, each 28x28 pixels in size.
 
