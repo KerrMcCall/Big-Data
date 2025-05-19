@@ -1,7 +1,7 @@
-# Big-Data ML Pipeline 2162940
+# Big Data ML Pipeline 2162940
 
 ## Introduction
-This project will provide a comprehensive report overviewing the steps required to deploy a Machine Learning Pipeline for Image Classification, employing Convolutional Neural Network (CNN). The entire process will be documented, from the data collection stage, through to the building of the model, evaluating its performance and using this to predict future performances. This will be repeated for three differnet models, which continue to improve upon the last in an iterative process. The structure of the code written in a separate Jupyter Notebook will be covered before potential future improvements will be considered - these will be influenced by the unfixed bugs that are present in the model.
+This project will provide a comprehensive report overviewing the steps required to deploy a Machine Learning Pipeline for Image Classification, employing Convolutional Neural Network (CNN). The entire process will be documented, from the data collection stage, through to the building of the model, evaluating its performance and using this to predict future performances. This will be repeated for three differnet models, which continue to improve upon the last in an iterative process. The structure of the code, written in a separate Jupyter Notebook, will be covered before potential future improvements will be considered - these will be influenced by the unfixed bugs that are present in the model.
 
 The data set used in this model is the Modified National Institute of Standards and Technology, abbreviated to MNIST, which is a classic dataset used for handwritten digit classification. It contains greyscale images of digits 0-9, each 28x28 pixels in size.
 
@@ -26,7 +26,7 @@ The above code loads the dataset and splits it into training (60,000 images) and
 
 The data was then validated by inspecting shapes, types and values, ensuring there were no missing entries. Pixel values were normalised to the range [0, 1] and reshaped into 3D tensors for CNN input.
 
-To split the data into training, validation and test subsets, the original 60,00 training images that MNIST had previously split was divided again into the new training (54,000 images) and validation (6,000 images) and the test set was left oly to be used after the model was trained for a final performance evaluation.
+To split the data into training, validation and test subsets, the original 60,00 training images that MNIST had previously split was divided again into the new training (54,000 images) and validation (6,000 images) and the test set was left only to be used after the model was trained for a final performance evaluation.
 
 ### 2. Exploratory Data Analysis (EDA)
 An EDA was conducted in order to better understand the structure and content of the MNIST dataset. Key points include analysing the image data and investigating the label distribution.
@@ -57,13 +57,13 @@ plt.ylabel("Count")
 plt.show()
 ```
 
-This code plots a bar chart showing the frequency of each digit in order to verify no imbalances in the dataset.
+This code plots a bar chart showing the frequency of each digit in order to verify no imbalances were present in the dataset.
 
 ### 3. Model Development
 The following section details the iterative process of building the CNN model, showing where the improvements were made along the way.
 
 #### First Model
-The first model that was built was a basic CNN, which was designed to be simple whilst still performing at a viable level.
+The first model that was built was a basic CNN, designed to be simple whilst still performing at a viable level.
 
 ##### Model Building
 A simple CNN with one convolutional and pooling layer followed by a dense classifier was used as the baseline model. 
@@ -87,7 +87,7 @@ history_1 = model_1.fit(X_train, y_train_cat, epochs=5, batch_size=128, validati
 ##### Model Evaluation
 The model had a validation accuracy of approximately 98.3%, which is viable based on the previously stated objectives. It was fast to train and simple to understand. It is likely that after the first 5 epochs, the validation loss would plateau or possibly diverge in such a simple model.
 
-The following code was used to provide a visual representation of the accuracy of each model:
+The following code was used to provide a visual representation of the training curve of each model:
 
 ```python
 plt.plot(history_1.history['accuracy'], label='Train Accuracy')
@@ -101,7 +101,7 @@ plt.show()
 The second iteration was a deeper CNN with Dropout which made improvements based on the first model's limitations.
 
 ##### Model Building
-The second model added another convolutional layer and dropout regularisation, which was to help reduce overfitting.
+The second model added another convolutional layer and dropout regularisation, which was implemented to help reduce overfitting.
 
 ```python
 model_2 = Sequential([
@@ -121,7 +121,7 @@ The chosen epoch number for this model was 10.
 ##### Model Evaluation
 The second CNN had an increased validation accuracy of roughly 99.2% and it handled the variation better. There was also less issues in regard to overfitting however the training time was slightly longer.
 
-There is still room for improvement in the area of accuracy and generalisation.
+There was still room for improvement in the area of accuracy and generalisation.
 
 #### Third Model
 The third model was developed as an optimised CNN with Batch Normalisation to further increase its depth.
@@ -148,12 +148,12 @@ model_3 = Sequential([
 This model had an epoch number of 12.
 
 ##### Model Evaluation
-The accuracy of this model further imoroved up to 99.3% and there was a minimal gap between the training and validation accuracy. This demonstrates a great level of generalisation and no major overfitting was observed.
+The accuracy of this model further improved up to 99.3% and there was a minimal gap between the training and validation accuracy. This demonstrates a great level of generalisation and no major overfitting was observed.
 
 The downsides are that it took longer to train and had a higher memory usage.
 
 ### 4. Prediction
-Once the third model was trained and validated, it was used to mkae predictions on unseen data. This was carried out to test the model's ability to generalise beyond the training and validation subsets.
+Once the third model was trained and validated, it was used to make predictions on unseen data. This was carried out to test the model's ability to generalise beyond the training and validation subsets.
 
 The following code was used:
 ```python
